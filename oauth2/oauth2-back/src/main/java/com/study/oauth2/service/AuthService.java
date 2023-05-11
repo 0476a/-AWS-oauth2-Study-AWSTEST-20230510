@@ -1,9 +1,11 @@
 package com.study.oauth2.service;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -11,7 +13,9 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.study.oauth2.dto.auth.OAuth2ProviderMergeReqDto;
 import com.study.oauth2.dto.auth.OAuth2RegisterReqDto;
 import com.study.oauth2.entity.Authority;
 import com.study.oauth2.entity.User;
@@ -34,6 +38,8 @@ public class AuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
 		// 구글에서 저장한 계정 정보가 들어있다.
 		OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest);
 		
+		System.out.println(oAuth2User);
+		
 		String registrationId = userRequest.getClientRegistration().getRegistrationId();
 		
 		OAuth2Attribute oAuth2Attribute = OAuth2Attribute.of(registrationId, oAuth2User.getAttributes());
@@ -55,6 +61,27 @@ public class AuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2U
 					.roleId(1)
 					.build()
 		);
+	}
+	
+	public boolean checkPassword(String email, String password) {
+		User userEntity = userRepository.findUserByEmail(email);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		return passwordEncoder.matches(password, userEntity.getPassword());
+	}
+	
+	public int oAuth2ProviderMerge(OAuth2ProviderMergeReqDto oAuth2ProviderMergeReqDto) {
+		User userEntity = userRepository.findUserByEmail(oAuth2ProviderMergeReqDto.getEmail());
+		
+		String provider = oAuth2ProviderMergeReqDto.getProvider();
+		if(StringUtils.hasText(userEntity.getProvider())) {
+			// provider가 기존에 있지만 다른 provider가 들어 왔을 때
+			userEntity.setProvider(userEntity.getProvider() + "," + provider);
+		} else {
+			// provider가 아예없을 때
+			userEntity.setProvider(provider);
+		}
+		
+		return userRepository.updateProvider(userEntity);
 	}
 	
 	
