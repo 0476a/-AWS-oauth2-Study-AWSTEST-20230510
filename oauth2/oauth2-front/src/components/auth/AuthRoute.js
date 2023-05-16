@@ -27,7 +27,7 @@ const AuthRoute = ({ path, element }) => {
     });
 
     // 인증이 되었을 때만 들어갈 수 있는 것
-    const authenticatedPaths = ["/mypage", "/user"];
+    const authenticatedPaths = ["/mypage", "/user", "/post"];
     const authPath = "/auth"
 
     if(authenticated.isLoading) {

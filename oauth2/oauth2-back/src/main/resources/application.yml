@@ -1,4 +1,8 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/book_management
@@ -51,3 +55,6 @@ mybatis:
 
 jwt:
   secret: XLdUma5wd6YdAdUHqvnWxJpWq8Djkf6HP7PuJOvm6sHqE4TrlLBU6fC3CyPlpTn9
+  
+file:
+  path: C:/kbs/aws_20221228_kbs/workspace/AWS_oauth2_study_20230510/oauth2/oauth2-back/upload/
