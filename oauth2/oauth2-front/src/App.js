@@ -9,6 +9,7 @@ import OAuth2Login from './pages/Login/OAuth2Login';
 import AuthRoute from './components/auth/AuthRoute';
 import PostRegister from './pages/Posts/PostRegister';
 import ForgotPassword from './pages/Forgot/ForgotPassword';
+import Profile from './pages/Mypage/Profile';
 
 function App() {
   return (
@@ -16,8 +17,10 @@ function App() {
       <Routes>
         <Route path='/auth/forgot/password' element={<AuthRoute path={"/auth/forgot/password"} element={<ForgotPassword />} />} />
         <Route path='/' element={<AuthRoute path={"/"} element={<Index />} />} />
-        <Route path='/mypage' element={<AuthRoute path={"/mypage"} element={<Index />} />} />
+
+        <Route path='/mypage/profile' element={<AuthRoute path={"/mypage/profile"} element={<Profile />} />} />
         <Route path='/post/register' element={<AuthRoute path={"/post/register"} element={<PostRegister />} />} />
+
         <Route path='/auth/login' element={<AuthRoute path={"/auth/login"} element={<Login />} />} />
         <Route path='/auth/register' />
         <Route path='/auth/oauth2/login' element={<AuthRoute path={"/auth/oauth2/login"} element={<OAuth2Login />} />} />
