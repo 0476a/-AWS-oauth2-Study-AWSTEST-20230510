@@ -18,6 +18,13 @@
 	</properties>
 	<dependencies>
 	
+		<!-- [ MAIL ] -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+	
 		<!-- [ AUTH ] -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
