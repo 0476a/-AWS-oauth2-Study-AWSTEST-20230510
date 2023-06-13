@@ -6,11 +6,11 @@ const Login = () => {
     const naviagte = useNavigate();
 
     const googleAuthClickHandle = () => {
-        window.location.href = `http://localhost:8080/oauth2/authorization/google`;
+        window.location.href = `http://52.78.102.234/oauth2/authorization/google`;
     }
 
     const naverAuthClickHandle = () => {
-        window.location.href = `http://localhost:8080/oauth2/authorization/naver`;
+        window.location.href = `http://52.78.102.234/oauth2/authorization/naver`;
 
     }
 

@@ -39,7 +39,8 @@ public class MailService {
 					"<div>"
 					+ "<h1>비밀번호 찾기</h1>"
 					+ "<p>비밀번호를 변경하려면 아래의 버튼을 클릭하세요.</p>"
-					+ "<a href=\"http://localhost:3000/auth/forgot/password/new/" + token + "\">비밀번호 변경하기</a>"
+//					+ "<a href=\"http://localhost:3000/auth/forgot/password/new/" + token + "\">비밀번호 변경하기</a>"
+					+ "<a href=\"http://0476a.s3-website.ap-northeast-2.amazonaws.com" + token + "\">비밀번호 변경하기</a>"
 					+ "</div>", "utf-8", "html");
 			javaMailSender.send(message);
 		} catch (MessagingException e) {

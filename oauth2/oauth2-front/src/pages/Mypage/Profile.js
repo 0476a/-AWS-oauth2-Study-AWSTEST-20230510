@@ -55,8 +55,8 @@ const Profile = () => {
                 "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        const response = await axios.get("http://localhost:8080/account/principal", option);
-        setProfileImgURL("http://localhost:8080/image/profile/" + response.data.profileImg);
+        const response = await axios.get("http://52.78.102.234/account/principal", option);
+        setProfileImgURL("http://52.78.102.234/image/profile/" + response.data.profileImg);
         return response;
     })
 
@@ -71,7 +71,7 @@ const Profile = () => {
             }
         }
 
-        const response = await axios.post("http://localhost:8080/account/profile/img", formData, option);
+        const response = await axios.post("http://52.78.102.234/account/profile/img", formData, option);
         return response;
     }, {
         onSuccess: () => {

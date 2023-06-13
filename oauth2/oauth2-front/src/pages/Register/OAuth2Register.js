@@ -5,31 +5,31 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const OAuth2Register = () => {
     const navigate = useNavigate();
-    const [ passwords, setPasswords ] = useState({password: "", checkPassword: ""});
+    const [passwords, setPasswords] = useState({ password: "", checkPassword: "" });
     const oauth2Register = useMutation(async (registerData) => {
         const option = {
             headers: {
-                registerToken:`Bearer ${registerToken}`
+                registerToken: `Bearer ${registerToken}`
             }
         }
         try {
-            const response = await axios.post("http://localhost:8080/auth/oauth2/register", registerData, option);
+            const response = await axios.post("http://52.78.102.234/auth/oauth2/register", registerData, option);
             return response;
-        } catch(error) {
+        } catch (error) {
             alert("페이지가 만료되었습니다.")
             window.location.replace("/auth/login");
             return error;
         }
     }, {
         onSuccess: (response) => {
-            if(response.status === 200) {
+            if (response.status === 200) {
                 alert("회원가입 완료.");
                 window.location.replace("/auth/login");
             }
         }
     });
 
-    const [ searchParams, setSearchParams ] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const registerToken = searchParams.get("registerToken");
     const email = searchParams.get("email");
@@ -38,7 +38,7 @@ const OAuth2Register = () => {
 
     const passwordInputChangeHandle = (e) => {
         const { name, value } = e.target;
-        setPasswords({...passwords, [name]: value});
+        setPasswords({ ...passwords, [name]: value });
     }
 
     const oauth2RegisterSubmitHandle = () => {
@@ -54,10 +54,10 @@ const OAuth2Register = () => {
         <div>
             <input type="text" value={email} disabled={true} />
             <input type="text" value={name} disabled={true} />
-            <input type="password" name='password' placeholder="비밀번호" 
-                onChange={passwordInputChangeHandle}/>
-            <input type="password" name='checkPassword' placeholder="비밀번호확인" 
-                onChange={passwordInputChangeHandle}/>
+            <input type="password" name='password' placeholder="비밀번호"
+                onChange={passwordInputChangeHandle} />
+            <input type="password" name='checkPassword' placeholder="비밀번호확인"
+                onChange={passwordInputChangeHandle} />
             <button onClick={oauth2RegisterSubmitHandle}>가입하기</button>
         </div>
     );

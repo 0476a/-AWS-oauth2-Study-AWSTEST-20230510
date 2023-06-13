@@ -7,7 +7,7 @@ import { authenticationState } from '../../store/atoms/AuthAtoms';
 
 const AuthRoute = ({ path, element }) => {
     const navigate = useNavigate();
-    const [ authState, setAuthState ] = useRecoilState(authenticationState);
+    const [authState, setAuthState] = useRecoilState(authenticationState);
 
     const authenticated = useQuery(["authenticated"], async () => {
         const option = {
@@ -15,11 +15,11 @@ const AuthRoute = ({ path, element }) => {
                 "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
             }
         }
-        return await axios.get("http://localhost:8080/auth/authenticated", option);
+        return await axios.get("http://52.78.102.234/auth/authenticated", option);
     }, {
         onSuccess: (response) => {
-            if(response.status === 200) {
-                if(response.data) {
+            if (response.status === 200) {
+                if (response.data) {
                     setAuthState(true);
                 }
             }
@@ -30,14 +30,14 @@ const AuthRoute = ({ path, element }) => {
     const authenticatedPaths = ["/mypage", "/user", "/post"];
     const authPath = "/auth"
 
-    if(authenticated.isLoading) {
+    if (authenticated.isLoading) {
         return <></>
     }
 
-    if(authState && path.startsWith(authPath)) {
+    if (authState && path.startsWith(authPath)) {
         navigate("/");
     }
-    if(!authState && authenticatedPaths.filter(authenticatedPath => path.startsWith(authenticatedPath)).length > 0) {
+    if (!authState && authenticatedPaths.filter(authenticatedPath => path.startsWith(authenticatedPath)).length > 0) {
         navigate("/auth/login");
     }
     return element;

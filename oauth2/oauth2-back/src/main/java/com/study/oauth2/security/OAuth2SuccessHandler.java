@@ -40,7 +40,8 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 			String name = oAuth2User.getAttribute("name");
 			response
 			.sendRedirect(
-				"http://localhost:3000/auth/oauth2/register"
+//				"http://localhost:3000/auth/oauth2/register"
+				"http://0476a.s3-website.ap-northeast-2.amazonaws.com"
 						+ "?registerToken=" + registerToken 
 						+ "&email=" + email
 						+ "&name=" + URLEncoder.encode(name, "UTF-8")
@@ -51,17 +52,20 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 				// 회원가입이 되어 있고 provider가 등록된 경우
 				if(!userEntity.getProvider().contains(provider)) {
 					// 하지만 로그인된 oauth2 계정의 provider는 등록이 안된 경우
-					response.sendRedirect("http://localhost:3000/auth/oauth2/merge"
+//					response.sendRedirect("http://localhost:3000/auth/oauth2/merge"
+					response.sendRedirect("http://0476a.s3-website.ap-northeast-2.amazonaws.com"
 							+ "?provider=" + provider
 							+ "&email=" + email);
 					return;	
 				}
-				response.sendRedirect("http://localhost:3000/auth/oauth2/login"
+//				response.sendRedirect("http://localhost:3000/auth/oauth2/login"
+				response.sendRedirect("http://0476a.s3-website.ap-northeast-2.amazonaws.com"
 						+ "?accessToken=" + jwtTokenProvider.generateAccessToken(authentication));
 				
 			} else {
 				// 회원가입은 되어 있지만 provider가 null인 경우
-				response.sendRedirect("http://localhost:3000/auth/oauth2/merge"
+//				response.sendRedirect("http://localhost:3000/auth/oauth2/merge"
+				response.sendRedirect("http://0476a.s3-website.ap-northeast-2.amazonaws.com"
 										+ "?provider=" + provider
 										+ "&email=" + email);
 			}

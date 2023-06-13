@@ -6,7 +6,7 @@ const ForgotPassword = () => {
     const [email, setEmail] = useState("");
 
     const sendMail = useMutation(async () => {
-        const response = await axios.post("http://localhost:8080/mail/send", { email });
+        const response = await axios.post("http://52.78.102.234/mail/send", { email });
         alert(response.data);
         return response;
     });
