@@ -1,2 +1,1 @@
-# AWS_oauth2_study_20230510
-oauth2 학습 파일
+# -AWS-oauth2-Study-AWSTEST-20230510
